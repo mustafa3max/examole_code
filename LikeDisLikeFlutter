@@ -1,0 +1,88 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  bool _isColorLike = false;
+  bool _isColorDisLike = false;
+  int _numLike = 0;
+  int _numDisLike = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Material(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            TextButton.icon(
+              label: Text("$_numDisLike",
+                style: TextStyle(
+                  color: _isColorDisLike?Colors.red:Colors.grey,
+                  fontSize: 28
+                ),
+              ),
+              icon: Icon(
+                Icons.thumb_down_alt_outlined,
+                color: _isColorDisLike?Colors.red:Colors.grey,
+                size: 48,
+              ),
+              onPressed: (){
+                setState(() {
+                  if(_numDisLike == 1){
+                    _numLike = 0;
+                    _numDisLike = 0;
+                    _isColorLike = false;
+                    _isColorDisLike = false;
+                  }
+                  else{
+                    _numLike = 0;
+                    _numDisLike = 1;
+                    _isColorLike = false;
+                    _isColorDisLike = true;
+                  }
+                });
+              },
+            ),
+            TextButton.icon(
+              label: Text("$_numLike",
+                  style: TextStyle(
+                    color: _isColorLike?Colors.red:Colors.grey,
+                      fontSize: 28
+                  )
+              ),
+              icon: Icon(
+                Icons.thumb_up_alt_outlined,
+                color: _isColorLike?Colors.red:Colors.grey,
+                size: 48,
+              ),
+              onPressed: (){
+                setState(() {
+                  if(_numLike == 1){
+                    _numLike = 0;
+                    _numDisLike = 0;
+                    _isColorLike = false;
+                    _isColorDisLike = false;
+                  }
+                  else{
+                    _numLike = 1;
+                    _numDisLike = 0;
+                    _isColorLike = true;
+                    _isColorDisLike = false;
+                  }
+                });
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
